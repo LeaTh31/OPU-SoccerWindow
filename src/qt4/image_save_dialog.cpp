@@ -88,7 +88,7 @@ ImageSaveDialog::ImageSaveDialog( MainWindow * main_window,
 
 {
 
-    QString saveDir = QDir::currentPath()+"/ResultImages/blbl";
+    QString saveDir = QDir::currentPath()+"/ResultImages";
     QString namePrefix = "frame-";
     QString formatName = "png";
 

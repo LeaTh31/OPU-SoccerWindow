@@ -74,11 +74,11 @@ ImageSaveDialog::ImageSaveDialog( MainWindow * main_window,
 /*!
 
 */
-//Lea
+// Lea Eisti 2018
 //To do the screenshots automatically 
 ImageSaveDialog::ImageSaveDialog( MainWindow * main_window,
                                   FieldCanvas * field_canvas,
-                                  MainData & main_data, 
+                                  MainData & main_data,
                                   int current_index )
     : QDialog( main_window )
     , M_main_window( main_window )
@@ -88,76 +88,14 @@ ImageSaveDialog::ImageSaveDialog( MainWindow * main_window,
 
 {
 
-    //int current_index = 0;
     QString saveDir = QDir::currentPath()+"/ResultImages/blbl";
     QString namePrefix = "frame-";
     QString formatName = "png";
 
-    // std::cout << "test1" << std::endl;
-    // M_start_cycle->setValue(current_index);
-    // std::cout << "  start cycle = " << M_start_cycle->GetValue() << std::endl;
-    // std::cout << "test2" << std::endl;
-    // M_end_cycle->setValue(current_index);
-    
-    // M_saved_dir->setText(QDir::currentPath()+"/ResultImages/blbl");
-
-
-    // M_name_prefix->setText("frame-");
-    // M_format_choice->setCurrentIndex(current_index);
-
     saveImage( current_index,
-                current_index,
                saveDir,
                namePrefix,
                formatName );
-
-
-    // saveImage( 0,
-    //            0,
-    //            QDir::currentPath()+"/ResultImages/blbl",
-    //            "frame-",
-    //            current_index );
-
-
-    //assert( main_window );
-
-    //this->setWindowTitle( tr( "Image Save" ) );
-
-
-    //createDirSelectControls
-    /*
-    QString dir_str;
-    if ( ! Options::instance().imageSaveDir().empty() )
-    {
-        QFileInfo file_info( Options::instance().imageSaveDir().c_str() );
-        if ( ! file_info.isDir() )
-        {
-            QDir dir;
-            if ( dir.mkdir( file_info.absoluteFilePath() ) )
-            {
-                file_info.setFile( file_info.absoluteFilePath() );
-            }
-        }
-
-        if ( file_info.isDir()
-             && file_info.isWritable() )
-        {
-            dir_str = file_info.absoluteFilePath();
-        }
-    }
-    else
-    {
-        dir_str = QDir::currentPath();
-    }
-
-    M_saved_dir = new QLineEdit( dir_str );
-    M_saved_dir->setMinimumWidth( qMax( 360,
-                                        M_saved_dir->fontMetrics().width( dir_str )
-                                        + 32 ) );
-
-
-    createControls(dir);
-    */
 
 }
 
@@ -198,36 +136,6 @@ ImageSaveDialog::createControls()
 
     this->setLayout( layout );
 }
-
-/*-------------------------------------------------------------------*/
-/*!
-
-*/
-
-//Lea
-//To do the screenshots automatically 
-/*
-void
-ImageSaveDialog::createControls(QString dir)
-{
-    QVBoxLayout * layout = new QVBoxLayout();
-    layout->setSizeConstraint( QLayout::SetFixedSize );
-
-    layout->addWidget( createCycleSelectControls(),
-                       0, Qt::AlignLeft );
-
-    layout->addWidget( createFileNameControls(),
-                       0, Qt::AlignLeft );
-
-    layout->addWidget( createDirSelectControls(dir),
-                       0, Qt::AlignLeft );
-
-    layout->addLayout( createExecuteControls(),
-                       0 );
-
-    this->setLayout( layout );
-}
-*/
 
 /*-------------------------------------------------------------------*/
 /*!
@@ -405,66 +313,6 @@ ImageSaveDialog::createDirSelectControls()
 /*!
 
 */
-
-//Lea
-//To do the screenshots automatically 
-/*
-QWidget *
-ImageSaveDialog::createDirSelectControls(QString dir)
-{
-    QGroupBox * group_box = new QGroupBox( tr( "Save Directry" ) );
-
-    QHBoxLayout * layout = new QHBoxLayout();
-
-    QString dir_str;
-    if ( ! Options::instance().imageSaveDir().empty() )
-    {
-        QFileInfo file_info( Options::instance().imageSaveDir().c_str() );
-        if ( ! file_info.isDir() )
-        {
-            QDir dir;
-            if ( dir.mkdir( file_info.absoluteFilePath() ) )
-            {
-                file_info.setFile( file_info.absoluteFilePath() );
-            }
-        }
-
-        if ( file_info.isDir()
-             && file_info.isWritable() )
-        {
-            dir_str = file_info.absoluteFilePath();
-        }
-    }
-    else
-    {
-        dir_str = QDir::currentPath();
-    }
-
-    M_saved_dir = new QLineEdit( dir_str );
-    M_saved_dir->setMinimumWidth( qMax( 360,
-                                        M_saved_dir->fontMetrics().width( dir_str )
-                                        + 32 ) );
-    layout->addWidget( M_saved_dir,
-                       0, Qt::AlignVCenter );
-
-    QPushButton * button = new QPushButton( tr( "..." ) );
-    button->setMaximumSize( this->fontMetrics().width( tr( "..." ) ) + 12,
-                            this->fontMetrics().height() + 12 );
-    button->setSizePolicy( QSizePolicy::Fixed, QSizePolicy::Fixed );
-    connect( button, SIGNAL( clicked() ),
-             this, SLOT( selectSavedDir(dir) ) );
-    layout->addWidget( button );
-
-    group_box->setLayout( layout );
-
-    return group_box;
-}
-*/
-
-/*-------------------------------------------------------------------*/
-/*!
-
-*/
 QLayout *
 ImageSaveDialog::createExecuteControls()
 {
@@ -563,23 +411,6 @@ ImageSaveDialog::selectSavedDir()
 /*!
 
 */
-
-
-//Lea
-//To do the screenshots automatically 
-/*
-void
-ImageSaveDialog::selectSavedDir(QString dir)
-{
-    M_saved_dir->setText( dir );
-}
-*/
-
-/*-------------------------------------------------------------------*/
-/*!
-
-*/
-
 void
 ImageSaveDialog::executeSave()
 {
@@ -615,20 +446,6 @@ ImageSaveDialog::executeSave()
 /*-------------------------------------------------------------------*/
 /*!
 
-*/
-/*
-* Modification and comments : Lea
-* start_circle : index of the first frame we want
-* end_circle : index of the first frame we want
-* saved_dir : the directory where the images are saved
-* name_prefix : the name of the image ("image-"")
-* format_name : the format of the image ("png")
-*
-* viewHolder : all the things we can see in the window (play mode, team, ...)
-* monitorViewCont : return the M_monitor_view_cont, with the type : std::vector<MonitorViewPtr>. 
-*   M_monitor_view_cont is the data container. 
-* main_data : M_main_data : parameter passed to the constructor of ImageSaveDialog. 
-*   Containt the data of the matches. Many manipulation with the class log_player. 
 */
 void
 ImageSaveDialog::saveImage( const int start_cycle,
@@ -792,8 +609,21 @@ ImageSaveDialog::saveImage( const int start_cycle,
 /*!
 
 */
-// Lea
-// plus besoin ?
+/*
+* Modification and comments : Lea Eisti 2018
+* start_circle : index of the first frame we want
+* end_circle : index of the first frame we want
+*   Here replace by current_index because we save only one image
+* saved_dir : the directory where the images are saved
+* name_prefix : the name of the image ("image-"")
+* format_name : the format of the image ("png")
+*
+* viewHolder : all the things we can see in the window (play mode, team, ...)
+* monitorViewCont : return the M_monitor_view_cont, with the type : std::vector<MonitorViewPtr>. 
+*   M_monitor_view_cont is the data container. 
+* main_data : M_main_data : parameter passed to the constructor of ImageSaveDialog. 
+*   Containt the data of the matches. Many manipulation with the class log_player. 
+*/
 void
 ImageSaveDialog::saveImage( const int current_index,
                             const QString & saved_dir,
@@ -813,19 +643,14 @@ ImageSaveDialog::saveImage( const int current_index,
 
     QString format = format_name.toLower();
 
-    // return the size of the object M_main_data
-    const int backup_index = M_main_data.viewIndex();
+    const int first = M_main_data.viewHolder().getIndexOf( current_index-1 );
+    const int last = M_main_data.viewHolder().getIndexOf( current_index-1 );
 
-    const int index_to_save = M_main_data.viewHolder().getIndexOf( current_index );
-
-    // const int first = M_main_data.viewHolder().getIndexOf( start_cycle );
-    // const int last = M_main_data.viewHolder().getIndexOf( end_cycle );
-
-    if ( index_to_save < 0 )
+    if ( first > last )
     {
         QMessageBox::warning( this,
                               tr( "Error" ),
-                              tr( "Invalid index!" ) );
+                              tr( "Invalid cycle range!" ) );
         return;
     }
 
@@ -869,70 +694,20 @@ ImageSaveDialog::saveImage( const int current_index,
     const QSize size = M_field_canvas->size();
     QImage image( M_field_canvas->size(), QImage::Format_RGB32 );
 
-    std::cerr << "Save image size = "
-              << M_field_canvas->size().width() << ", "
-              << M_field_canvas->size().height() << std::endl;
-
     // constructs a painter that begins painting the paint "image" immediately.
     QPainter painter( &image );
 
-    // show progress dialog
-    // QProgressDialog progress_dialog( this );
-    // progress_dialog.setWindowTitle( tr( "Image Save Progress" ) );
-    // progress_dialog.setRange( index_to_save, index_to_save );
-    // progress_dialog.setValue( index_to_save );
-    // progress_dialog.setLabelText( file_path + tr( "00000" ) + file_ext );
-
-    // bool confirm = true;
-
     // main loop
-    // for ( int i = index_to_save; i <= index_to_save; ++i )
-    // {
+    for ( int i = first; i <= last; ++i )
+    {
         // full file path
         QString file_path_all = file_path;
         //snprintf( count, 16, "%05d", i );
-        file_path_all += QString( "%1" ).arg( index_to_save, 5, 10, QChar( '0' ) );
+        file_path_all += QString( "%1" ).arg( i, 5, 10, QChar( '0' ) );
         file_path_all += file_ext;
 
-        // ask if we want to overwrite the file when it already exists
-        // if ( confirm
-        //      && QFile::exists( file_path_all ) )
-        // {
-        //     int result
-        //         = QMessageBox::question( this,
-        //                                  tr( "Overwrite?" ),
-        //                                  tr( "There already exists a file called %1.\n Overwrite?")
-        //                                  .arg( file_path_all ),
-        //                                  QMessageBox::No,
-        //                                  QMessageBox::Yes,
-        //                                  QMessageBox::YesAll );
-        //     if ( result == QMessageBox::No )
-        //     {
-        //         progress_dialog.cancel();
-        //         M_main_data.setViewDataIndex( backup_index );
-        //         return;
-        //     }
-        //     else if ( result == QMessageBox::YesAll )
-        //     {
-        //         confirm = false;
-        //     }
-        // }
 
-        // progress_dialog.setValue( i );
-        // progress_dialog.setLabelText( file_path_all );
-
-        //QCoreApplication::processEvents();
-        // if ( i % 20 == 0 )
-        // {
-        //     qApp->processEvents();
-        //     if ( progress_dialog.wasCanceled() )
-        //     {
-        //         M_main_data.setViewDataIndex( backup_index );
-        //         return;
-        //     }
-        // }
-
-        M_main_data.setViewDataIndex( index_to_save );
+        M_main_data.setViewDataIndex( i );
         M_main_data.update( size.width(), size.height() );
 
         M_field_canvas->draw( painter );
@@ -944,12 +719,9 @@ ImageSaveDialog::saveImage( const int current_index,
                                    tr( "Error" ),
                                    tr( "Failed to save image file " )
                                    + file_path_all );
-            M_main_data.setViewDataIndex( backup_index );
             return;
         }
-    // }
-
-    M_main_data.setViewDataIndex( backup_index );
+    }
 
     accept();
 }

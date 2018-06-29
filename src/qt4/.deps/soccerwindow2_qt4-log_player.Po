@@ -304,7 +304,30 @@ soccerwindow2_qt4-log_player.o: log_player.cpp /usr/include/stdc-predef.h \
  /home/lea/rcss/include/rcsc/common/player_type.h \
  /home/lea/rcss/include/rcsc/soccer_math.h \
  /home/lea/rcss/include/rcsc/common/team_graphic.h \
- /home/lea/rcss/include/rcsc/rcg/holder.h
+ /home/lea/rcss/include/rcsc/rcg/holder.h main_window.h \
+ /usr/include/qt4/QtGui/QMainWindow /usr/include/qt4/QtGui/qmainwindow.h \
+ /usr/include/qt4/QtGui/qwidget.h /usr/include/qt4/QtGui/qwindowdefs.h \
+ /usr/include/qt4/QtCore/qmargins.h /usr/include/qt4/QtGui/qpaintdevice.h \
+ /usr/include/qt4/QtCore/qrect.h /usr/include/qt4/QtCore/qsize.h \
+ /usr/include/qt4/QtCore/qpoint.h /usr/include/qt4/QtGui/qpalette.h \
+ /usr/include/qt4/QtGui/qcolor.h /usr/include/qt4/QtGui/qrgb.h \
+ /usr/include/qt4/QtCore/qstringlist.h \
+ /usr/include/qt4/QtCore/qdatastream.h \
+ /usr/include/qt4/QtCore/qiodevice.h /usr/include/qt4/QtCore/qregexp.h \
+ /usr/include/qt4/QtCore/qstringmatcher.h /usr/include/qt4/QtGui/qbrush.h \
+ /usr/include/qt4/QtCore/qpair.h /usr/include/qt4/QtCore/qvector.h \
+ /usr/include/qt4/QtGui/qmatrix.h /usr/include/qt4/QtGui/qpolygon.h \
+ /usr/include/qt4/QtGui/qregion.h /usr/include/qt4/QtCore/qline.h \
+ /usr/include/qt4/QtGui/qtransform.h \
+ /usr/include/qt4/QtGui/qpainterpath.h /usr/include/qt4/QtGui/qimage.h \
+ /usr/include/qt4/QtGui/qpixmap.h \
+ /usr/include/qt4/QtCore/qsharedpointer.h \
+ /usr/include/qt4/QtCore/qshareddata.h \
+ /usr/include/qt4/QtCore/qsharedpointer_impl.h \
+ /usr/include/qt4/QtGui/qfont.h /usr/include/qt4/QtGui/qfontmetrics.h \
+ /usr/include/qt4/QtGui/qfontinfo.h /usr/include/qt4/QtGui/qsizepolicy.h \
+ /usr/include/qt4/QtGui/qcursor.h /usr/include/qt4/QtGui/qkeysequence.h \
+ /usr/include/qt4/QtGui/qtabwidget.h /usr/include/qt4/QtGui/qicon.h
 
 /usr/include/stdc-predef.h:
 
@@ -1065,3 +1088,83 @@ log_player.h:
 /home/lea/rcss/include/rcsc/common/team_graphic.h:
 
 /home/lea/rcss/include/rcsc/rcg/holder.h:
+
+main_window.h:
+
+/usr/include/qt4/QtGui/QMainWindow:
+
+/usr/include/qt4/QtGui/qmainwindow.h:
+
+/usr/include/qt4/QtGui/qwidget.h:
+
+/usr/include/qt4/QtGui/qwindowdefs.h:
+
+/usr/include/qt4/QtCore/qmargins.h:
+
+/usr/include/qt4/QtGui/qpaintdevice.h:
+
+/usr/include/qt4/QtCore/qrect.h:
+
+/usr/include/qt4/QtCore/qsize.h:
+
+/usr/include/qt4/QtCore/qpoint.h:
+
+/usr/include/qt4/QtGui/qpalette.h:
+
+/usr/include/qt4/QtGui/qcolor.h:
+
+/usr/include/qt4/QtGui/qrgb.h:
+
+/usr/include/qt4/QtCore/qstringlist.h:
+
+/usr/include/qt4/QtCore/qdatastream.h:
+
+/usr/include/qt4/QtCore/qiodevice.h:
+
+/usr/include/qt4/QtCore/qregexp.h:
+
+/usr/include/qt4/QtCore/qstringmatcher.h:
+
+/usr/include/qt4/QtGui/qbrush.h:
+
+/usr/include/qt4/QtCore/qpair.h:
+
+/usr/include/qt4/QtCore/qvector.h:
+
+/usr/include/qt4/QtGui/qmatrix.h:
+
+/usr/include/qt4/QtGui/qpolygon.h:
+
+/usr/include/qt4/QtGui/qregion.h:
+
+/usr/include/qt4/QtCore/qline.h:
+
+/usr/include/qt4/QtGui/qtransform.h:
+
+/usr/include/qt4/QtGui/qpainterpath.h:
+
+/usr/include/qt4/QtGui/qimage.h:
+
+/usr/include/qt4/QtGui/qpixmap.h:
+
+/usr/include/qt4/QtCore/qsharedpointer.h:
+
+/usr/include/qt4/QtCore/qshareddata.h:
+
+/usr/include/qt4/QtCore/qsharedpointer_impl.h:
+
+/usr/include/qt4/QtGui/qfont.h:
+
+/usr/include/qt4/QtGui/qfontmetrics.h:
+
+/usr/include/qt4/QtGui/qfontinfo.h:
+
+/usr/include/qt4/QtGui/qsizepolicy.h:
+
+/usr/include/qt4/QtGui/qcursor.h:
+
+/usr/include/qt4/QtGui/qkeysequence.h:
+
+/usr/include/qt4/QtGui/qtabwidget.h:
+
+/usr/include/qt4/QtGui/qicon.h:

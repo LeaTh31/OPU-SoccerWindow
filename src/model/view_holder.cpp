@@ -904,6 +904,13 @@ ViewHolder::getViewData( const std::size_t idx ) const
 /*!
 
 */
+
+/*
+* Structure TimeCmp
+* MonitorViewPtr : shared_ptr< MonitorViewData >
+*   Shared ptr of the class MonitorViewData
+*   MonitorViewData : Playmode, Team, Ball, Player, cycle (cycle : current game cycle )
+*/
 namespace {
 
 struct TimeCmp {
@@ -928,6 +935,7 @@ ViewHolder::getIndexOf( const int cycle ) const
                             M_monitor_view_cont.end(),
                             cycle,
                             TimeCmp() );
+
     if ( it == M_monitor_view_cont.end() )
     {
         return 0;

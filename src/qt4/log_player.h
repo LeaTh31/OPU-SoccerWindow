@@ -67,11 +67,15 @@ public:
 
     bool isLiveMode() const;
 
+    MainData & getMainData() const
+    {
+        return M_main_data;
+    }
+
 private:
 
     void stepBackImpl();
     void stepForwardImpl();
-
 
 private slots:
 

@@ -49,43 +49,13 @@ main( int argc, char ** argv )
               << " "PACKAGE_NAME" "VERSION"\n"
               << " Copyright: (C) 2005 - 2011. Hidehisa Akiyama\n"
               << " All rights reserved.\n"
-              << "************************dfsdfsfsd******************************************\n"
+              << "******************************************************************\n"
               << std::endl;
 
 
 
     QApplication app( argc, argv );
     //QApplication::setStyle( "plastique" );
-
-
-
-    //std::cout << (QDir::currentPath()).toStdString() << std::endl;
-
-
-
-
-    //viewer_widgets = find_viewers()
-    //widget = viewer_widgets[0]
-
-
-
-    //La on cherche les coordonnees de la fenetre : 
-    //  left, right, width and height values. 
-    
-
-
-    // QWidget *w = QApplication::desktop();
-    //    if(w) {
-    //        static int count = 0;
-    //        QPixmap p = QPixmap::grabWidget(w);
-    //        QString format = "png";
-    //        // QString filePath = QDir::currentPath()+"/myscreen-"+count+"."+format;
-    //        QString filePath = QDir::currentPath()+"/myscreen-."+format;
-    //        p.save(filePath, format.toAscii());
-    //        //p.save(QString("/your/path/screenshot%1.png").arg(count));
-    //        count++;
-    //    }
-
 
     if ( ! Options::instance().parseCmdLine( argc, argv ) )
     {
@@ -95,8 +65,6 @@ main( int argc, char ** argv )
     MainWindow win;
     win.show();
     win.init();
-
-    
 
     return app.exec();
 }

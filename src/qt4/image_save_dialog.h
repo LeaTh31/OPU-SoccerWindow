@@ -73,6 +73,7 @@ public:
                      FieldCanvas * field_canvas,
                      MainData & main_data );
 
+    // Lea Eisti 2018
     ImageSaveDialog( MainWindow * main_window,
                      FieldCanvas * field_canvas,
                      MainData & main_data,
@@ -83,12 +84,10 @@ public:
 private:
 
     void createControls();
-    //void createControls(QString dir);
 
     QWidget * createCycleSelectControls();
     QWidget * createFileNameControls();
     QWidget * createDirSelectControls();
-    //QWidget * createDirSelectControls(QString dir);
     QLayout * createExecuteControls();
 
     void saveImage( const int start_cycle,
@@ -97,6 +96,7 @@ private:
                     const QString & name_prefix,
                     const QString & format_name );
 
+    // Lea Eisti 2018
     void saveImage( const int current_index,
                     const QString & saved_dir,
                     const QString & name_prefix,
@@ -110,7 +110,6 @@ protected:
 private slots:
 
     void selectSavedDir();
-    //void selectSavedDir(QString dir);
 
 public slots:
 

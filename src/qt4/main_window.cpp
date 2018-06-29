@@ -1970,26 +1970,6 @@ MainWindow::openRCG( const QString & file_path )
 void
 MainWindow::saveRCG()
 {
-
-/*
-    std::cout << "Screen ?" << std::endl;
-    QPixmap pixmap = QPixmap();
-    pixmap = QPixmap::grabWindow(QApplication::desktop()->winId());
- 
-    // - Save this picture
-    QString format = "png";
-    QString filePath = QDir::currentPath()+"/myscreen."+format;
-    pixmap.save(filePath, format.toAscii());
-
-    std::cout << "Screen peutetre ok" << std::endl;
-*/
-
-
-
-
-   
-
-
     if ( M_main_data.viewHolder().monitorViewCont().empty() )
     {
         QMessageBox::warning( this,
@@ -2093,229 +2073,27 @@ MainWindow::saveRCG()
 
 }
 
+/*-------------------------------------------------------------------*/
+/*!
+
+*/
+// Lea Eisti 2018
 void
-MainWindow::saveFrame()
+MainWindow::saveFrame(int current_index)
 {
 
-    //while prog pas finit on incremente current_index ?
-    //Voir si il y a mieux pour pouvoir recuperer chaque frame
+    // std::cout << current_index << std::endl;
+    // std::cout << "empty : " << new_mainData.viewHolder().monitorViewCont().empty() << std::endl;
 
-    int current_index = 0;
-    //QString dir = QDir::currentPath()+"/ResultImages/";
+    // If 1 : TRUE : empty
 
-    // while the server is active
+    // Maybe M_main_data is enough, to replace M_log_player->getMainData()
 
-    // std::cout << Options::instance().killServer() << std::endl;
-    // while (!(Options::instance().killServer())) 
-
-
-    //std::cout << M_monitor_client << std::endl << M_monitor_client->isConnected() << std::endl;
-
-    // while ( M_monitor_client && M_monitor_client->isConnected() )
-        // std::cout << M_main_data.viewIndex() << std::endl;
-        // std::cout << (unsigned)current_index << std::endl;
-        // std::cout << (M_main_data.viewIndex() > (unsigned)current_index) << std::endl;
-
-
-    
-
-
-    while ( true )
-    {
-        //current_index = M_main_data.viewHolder().monitorViewCont().back()->cycle();
-        // current_index = M_main_data.viewHolder().getIndexOf();
-        
-        // const std::vector< MonitorViewPtr > & view
-        // = M_main_data.viewHolder().monitorViewCont();
-
-        // current_index = view.back()->cycle();
-
-        std::cout << current_index << std::endl;
-        //if (M_main_data.viewIndex() > (unsigned)current_index)
-        //{
-            //current_index = M_main_data.viewIndex();
-            //std::cout << "---" << M_main_data.viewIndex() << "---" << std::endl;
-            ImageSaveDialog dlg( this,
-                         M_field_canvas,
-                         M_main_data,
-                         current_index );
-        current_index++;
-        
-        //}
-    }
-
-    
-    
+    ImageSaveDialog dlg( this,
+        M_field_canvas,
+        M_log_player->getMainData(),
+        current_index );
 }
-
-
-//Lea
-//Don't need
-// void
-// MainWindow::takeScreenshots()
-// {
-
-//     // saveImage( M_start_cycle->value(),
-//     //            M_end_cycle->value(),
-//     //            M_saved_dir->text(),
-//     //            M_name_prefix->text(),
-//     //            M_format_choice->currentText() );
-
-
-
-//     QString dir = QDir::currentPath()+"/ResultImages/";
-//     ImageSaveDialog dlg( this,
-//                          M_field_canvas,
-//                          M_main_data,
-//                          dir );
-
-
-//      // QString dir
-//      //    = QFileDialog::getExistingDirectory( this,
-//      //                                         tr( "Choose a saved directory" ),
-//      //                                         M_saved_dir->text(),
-//      //                                         QFileDialog::ShowDirsOnly
-//      //                                         | QFileDialog::DontResolveSymlinks);
-
-
-//      dlg.exec();
-
-//     // dlg.show();
-//     // dlg.selectAllCycle();
-//     // dlg.executeSave();
-
-//     // QRect crop_rect(this->x(), this->y(), this->width(), this->height());
-
-//     // QPixmap pixmap = QPixmap();
-    
-//     // //pixmap = QtGui.QPixmap.grabWindow(widget.winId());
-
-//     // // pixmap = QPixmap::grabWindow(QApplication::desktop()->winId(),
-//     // //   crop_rect.left(),
-//     // //   crop_rect.top(),
-//     // //   crop_rect.width(),
-//     // //   crop_rect.height());
-
-//     // pixmap = QPixmap::grabWindow(QApplication::desktop()->winId());
-
-//     // //pixmap = QPixmap::grabWindow(this->winId());
-
-
-//     // //pixmap = QPixmap::grabWindow(this->winId());
-//     // //pixmap = QPixmap::grabWindow((WId (winId());
-
-//     // QString format = "png";
-//     // QString filePath = QDir::currentPath()+"/ResultImages/myscreen."+format;
-//     // pixmap.save(filePath, format.toAscii());
-
-
-
-//     if ( M_main_data.viewHolder().monitorViewCont().empty() )
-//     {
-//         QMessageBox::warning( this,
-//                               tr( "Error" ),
-//                               tr( "No Monitor View Data!" ) );
-//         return;
-//     }
-
-//     QString default_file_name;
-//     {
-//         const MonitorViewConstPtr latest = M_main_data.viewHolder().latestViewData();
-
-//         if ( latest )
-//         {
-//             default_file_name
-//                 = QDateTime::currentDateTime().toString( "yyyyMMddhhmm-" );
-
-//             QString left_team = QString::fromStdString( latest->leftTeam().name() );
-//             QString left_score = QString::number( latest->leftTeam().score() );
-
-//             QString right_team = QString::fromStdString( latest->rightTeam().name() );
-//             QString right_score = QString::number( latest->rightTeam().score() );
-
-//             default_file_name += left_team;
-//             default_file_name += tr( "_" );
-//             default_file_name += left_score;
-//             default_file_name += tr( "-" );
-//             default_file_name += right_team;
-//             default_file_name += tr( "_" );
-//             default_file_name += right_score;
-
-//             default_file_name += tr( ".png" );
-//         }
-//     }
-
-//     QString filter( tr( "Screenshots Log (*.png);;"
-//                         "All files (*)" ) );
-
-//     QString default_dir
-//         = QString::fromStdString( Options::instance().gameLogDir() );
-//     if ( ! default_file_name.isEmpty() )
-//     {
-//         default_dir += tr( "/" );
-//         default_dir += default_file_name;
-//     }
-
-//     QString file_path = QFileDialog::getSaveFileName( this,
-//                                                       tr( "Save a screenshot as" ),
-//                                                       default_dir,
-//                                                       filter );
-
-//     if ( file_path.isEmpty() )
-//     {
-//         std::cerr << "MainWindow::takeScreenshots() empty file path" << std::endl;
-//         return;
-//     }
-
-//     std::string file_path_std = file_path.toStdString();
-
-//     std::cerr << "save screenshot to the file = [" << file_path_std
-//               << ']' << std::endl;
-
-//     // update game log dir
-//     QFileInfo file_info( file_path );
-//     Options::instance().setGameLogDir( file_info.absolutePath().toStdString() );
-
-//     // check gzip usability
-//     bool is_gzip = false;
-//     if ( file_path_std.length() > 3
-//          && file_path_std.compare( file_path_std.length() - 3, 3, ".gz" ) == 0 )
-//     {
-// #ifdef HAVE_LIBRCSC_GZ
-//         if ( file_path_std.length() <= 7
-//              || file_path_std.compare( file_path_std.length() - 4, 4, ".rcg.gz" ) != 0 )
-//         {
-//             file_path_std == ".rcg.gz";
-//         }
-//         is_gzip = true;
-// #else
-//         // erase '.gz'
-//         file_path_std.erase( file_path_std.length() - 3 );
-// #endif
-//     }
-
-//     // check the extention string
-//     if ( ! is_gzip )
-//     {
-//         if ( file_path_std.length() <= 4
-//              || file_path_std.compare( file_path_std.length() - 4, 4, ".rcg" ) != 0 )
-//         {
-//             file_path_std += ".rcg";
-//         }
-//     }
-
-//     M_main_data.saveRCG( file_path_std );
-
-    
-
-//     // QPixmap pixmap = QPixmap();
-//     // pixmap = QPixmap::grabWindow(QApplication::desktop()->winId());
- 
-//     // // - Save this picture
-//     // QString format = "png";
-//     // QString filePath = QDir::currentPath()+"/myscreen."+format;
-//     // pixmap.save(filePath, format.toAscii());
-// }
 
 /*-------------------------------------------------------------------*/
 /*!
@@ -2406,11 +2184,7 @@ MainWindow::kickOff()
          && M_monitor_client->isConnected() )
     {
         M_monitor_client->sendKickOff();
-
-        //saveFrame();
     }
-
-    //takeScreenshots();
 }
 
 /*-------------------------------------------------------------------*/

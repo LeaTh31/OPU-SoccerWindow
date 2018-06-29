@@ -213,3 +213,5 @@ MonitorViewData::convertTo( rcsc::rcg::DispInfoT & disp ) const
 
     disp.show_.time_ = cycle();
 }
+
+

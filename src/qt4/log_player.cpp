@@ -39,6 +39,7 @@
 
 #include "options.h"
 #include "main_data.h"
+#include "main_window.h"
 
 #include <iostream>
 
@@ -104,6 +105,7 @@ LogPlayer::stepBackImpl()
 {
     if ( M_main_data.setViewDataStepBack() )
     {
+        //send the signal updated to the mainWindow
         emit updated();
     }
     else
@@ -314,6 +316,7 @@ LogPlayer::goToLast()
 
         emit updated();
     }
+
 }
 
 /*-------------------------------------------------------------------*/
@@ -395,6 +398,23 @@ LogPlayer::showLive()
 
         emit updated();
     }
+
+    // Lea Eisti 2018
+    /*
+    * When we start the server, we take screenshots of the matches in real-time.
+    * We retrieve the mainWindow (the parent window) and call the function
+    * MainWindow::saveFrame that permit us to save the images of the match.
+    */
+
+    std::cout << "View index : " << M_main_data.viewIndex() << std::endl;
+
+
+    // ( M_main_data.viewIndex() % 100 == 0 ) 
+
+    if (! (M_main_data.getViewHolder().monitorViewCont().empty() ) )
+    {
+        ((MainWindow*)(parent()))->saveFrame(M_main_data.viewIndex());
+    }    
 }
 
 /*-------------------------------------------------------------------*/

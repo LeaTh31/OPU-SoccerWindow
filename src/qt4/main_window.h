@@ -65,6 +65,7 @@ class MainWindow
 
 private:
 
+    //M_main_data is initialized with an empty viewHolder and an index at 0
     MainData M_main_data;
 
     FieldCanvas * M_field_canvas;
@@ -194,6 +195,8 @@ public:
     //! initialize application settings using command line options.
     void init();
 
+    void saveFrame(int current_index);
+
 private:
 
     void readSettings();
@@ -221,9 +224,6 @@ private:
 
     void createFieldCanvas();
     void createViewConfigDialog();
-
-    //void takeScreenshots();
-    void saveFrame();
 
 protected:
 

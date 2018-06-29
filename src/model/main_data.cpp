@@ -58,9 +58,14 @@
 /*!
 
 */
+/*
+* MainData is created at the begining, when we launch the application
+*   even before we start the server. 
+*/
 MainData::MainData()
     : M_view_holder()
     , M_view_index( 0 )
+
 {
 
 }
@@ -189,6 +194,9 @@ MainData::saveRCG( const std::string & file_path )
 /*-------------------------------------------------------------------*/
 /*!
 
+*/
+/*
+* Function update called whenever we resize the window
 */
 void
 MainData::update( const int width,
@@ -336,6 +344,7 @@ MainData::setViewDataIndexLast()
     }
 
     M_view_index = M_view_holder.monitorViewCont().size() - 1;
+
     return true;
 }
 

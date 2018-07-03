@@ -643,17 +643,6 @@ ImageSaveDialog::saveImage( const int current_index,
 
     QString format = format_name.toLower();
 
-    const int first = M_main_data.viewHolder().getIndexOf( current_index-1 );
-    const int last = M_main_data.viewHolder().getIndexOf( current_index-1 );
-
-    if ( first > last )
-    {
-        QMessageBox::warning( this,
-                              tr( "Error" ),
-                              tr( "Invalid cycle range!" ) );
-        return;
-    }
-
     // create file path base
     QString file_path = saved_dir;
 
@@ -691,37 +680,28 @@ ImageSaveDialog::saveImage( const int current_index,
     QString file_ext = tr( "." ) + format;
 
     // field_canvas : data of the field
-    const QSize size = M_field_canvas->size();
     QImage image( M_field_canvas->size(), QImage::Format_RGB32 );
 
     // constructs a painter that begins painting the paint "image" immediately.
     QPainter painter( &image );
 
-    // main loop
-    for ( int i = first; i <= last; ++i )
+    // full file path
+    QString file_path_all = file_path;
+    
+    file_path_all += QString( "%1" ).arg( current_index, 5, 10, QChar( '0' ) );
+    file_path_all += file_ext;
+
+    M_field_canvas->draw( painter );
+
+    //std::cout << "save image " << file_path << std::endl;
+    if ( ! image.save( file_path_all, format.toAscii() ) )
     {
-        // full file path
-        QString file_path_all = file_path;
-        //snprintf( count, 16, "%05d", i );
-        file_path_all += QString( "%1" ).arg( i, 5, 10, QChar( '0' ) );
-        file_path_all += file_ext;
-
-
-        M_main_data.setViewDataIndex( i );
-        M_main_data.update( size.width(), size.height() );
-
-        M_field_canvas->draw( painter );
-
-        //std::cout << "save image " << file_path << std::endl;
-        if ( ! image.save( file_path_all, format.toAscii() ) )
-        {
-            QMessageBox::critical( this,
-                                   tr( "Error" ),
-                                   tr( "Failed to save image file " )
-                                   + file_path_all );
-            return;
-        }
+        QMessageBox::critical( this,
+                               tr( "Error" ),
+                               tr( "Failed to save image file " )
+                               + file_path_all );
+        return;
     }
-
+    
     accept();
 }

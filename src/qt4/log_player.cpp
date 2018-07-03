@@ -406,14 +406,13 @@ LogPlayer::showLive()
     * MainWindow::saveFrame that permit us to save the images of the match.
     */
 
-    std::cout << "View index : " << M_main_data.viewIndex() << std::endl;
+    int index_to_save = M_main_data.viewIndex() - 1;
 
-
-    // ( M_main_data.viewIndex() % 100 == 0 ) 
-
-    if (! (M_main_data.getViewHolder().monitorViewCont().empty() ) )
+    if (! (M_main_data.getViewHolder().monitorViewCont().empty() ) &&
+        ! ( M_main_data.getViewHolder().lastPlayMode() == rcsc::PM_BeforeKickOff ) && 
+        (index_to_save % 5 == 0) )
     {
-        ((MainWindow*)(parent()))->saveFrame(M_main_data.viewIndex());
+        ((MainWindow*)(parent()))->saveFrame(index_to_save);
     }    
 }
 

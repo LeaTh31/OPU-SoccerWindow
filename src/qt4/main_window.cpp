@@ -108,6 +108,7 @@ MainWindow::MainWindow()
     , M_monitor_client( static_cast< MonitorClient * >( 0 ) )
     , M_debug_server( static_cast< DebugServer * >( 0 ) )
     , M_last_connected_host( "127.0.0.1" )
+    , M_dateTime_begin( QDateTime::currentDateTime().toString( "yyyyMMddhhmmss-" ) )
 {
     readSettings();
 
@@ -2092,7 +2093,8 @@ MainWindow::saveFrame(int current_index)
     ImageSaveDialog dlg( this,
         M_field_canvas,
         M_log_player->getMainData(),
-        current_index );
+        current_index,
+        M_dateTime_begin );
 }
 
 /*-------------------------------------------------------------------*/
@@ -2185,6 +2187,10 @@ MainWindow::kickOff()
     {
         M_monitor_client->sendKickOff();
     }
+
+    // Lea Eisti 2018
+    // To save the images of the match with the date and time in the name file
+    M_dateTime_begin = QDateTime::currentDateTime().toString( "yyyyMMddhhmmss-" );
 }
 
 /*-------------------------------------------------------------------*/

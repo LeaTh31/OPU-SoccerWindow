@@ -92,6 +92,9 @@ private:
 
     QString M_server_command;
 
+    // Lea Eisti 2018
+    QString M_dateTime_begin;
+
     // file actions
     QAction * M_open_rcg_act;
     QAction * M_save_rcg_act;

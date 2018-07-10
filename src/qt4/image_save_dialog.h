@@ -77,7 +77,8 @@ public:
     ImageSaveDialog( MainWindow * main_window,
                      FieldCanvas * field_canvas,
                      MainData & main_data,
-                     int current_index );
+                     int current_index,
+                     QString M_dateTime_begin );
 
     ~ImageSaveDialog();
 

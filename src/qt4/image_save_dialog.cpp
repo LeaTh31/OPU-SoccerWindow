@@ -79,7 +79,8 @@ ImageSaveDialog::ImageSaveDialog( MainWindow * main_window,
 ImageSaveDialog::ImageSaveDialog( MainWindow * main_window,
                                   FieldCanvas * field_canvas,
                                   MainData & main_data,
-                                  int current_index )
+                                  int current_index,
+                                  QString M_dateTime_begin )
     : QDialog( main_window )
     , M_main_window( main_window )
     , M_field_canvas( field_canvas )
@@ -88,9 +89,25 @@ ImageSaveDialog::ImageSaveDialog( MainWindow * main_window,
 
 {
 
-    QString saveDir = QDir::currentPath()+"/ResultImages";
+    const MonitorViewConstPtr latest = main_data.viewHolder().latestViewData();
+
+    QString saveDir = QDir::currentPath()+"/MatchesFrames/";
     QString namePrefix = "frame-";
     QString formatName = "png";
+
+    saveDir += M_dateTime_begin;
+
+    QString left_team = QString::fromStdString( latest->leftTeam().name() );
+    QString left_score = QString::number( latest->leftTeam().score() );
+
+    QString right_team = QString::fromStdString( latest->rightTeam().name() );
+    QString right_score = QString::number( latest->rightTeam().score() );
+
+    saveDir += left_team;
+    saveDir += tr( "-vs-" );
+    saveDir += right_team;
+
+    // std::cout << QString::fromStdString(saveDir) << std::endl;
 
     saveImage( current_index,
                saveDir,

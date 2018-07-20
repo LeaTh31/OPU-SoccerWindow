@@ -696,11 +696,27 @@ ImageSaveDialog::saveImage( const int current_index,
 
     QString file_ext = tr( "." ) + format;
 
-    // field_canvas : data of the field
+    // QSize size(256,167);
+
+    // const QSize size = M_field_canvas->size();
+    // std::cout << (M_field_canvas->size()) << std::endl;
+
     QImage image( M_field_canvas->size(), QImage::Format_RGB32 );
+    // image.size() = QSize(256,167);
+    // QImage image = image1.scaled(256,167,Qt::KeepAspectRatio);
+
+    // field_canvas : data of the field
+    // QImage image( size, QImage::Format_RGB32 );
 
     // constructs a painter that begins painting the paint "image" immediately.
     QPainter painter( &image );
+
+    // ui->frameLabel->setPixmap(painter.scaled(32, 32, Qt::IgnoreAspectRatio, Qt::FastTransformation));
+
+
+    // painter.scale(0.8,0.8);
+
+    // QImage image = image1.scaled(256,167, Qt::IgnoreAspectRatio);
 
     // full file path
     QString file_path_all = file_path;
@@ -710,8 +726,12 @@ ImageSaveDialog::saveImage( const int current_index,
 
     M_field_canvas->draw( painter );
 
+    painter.scale(0.2,0.2);
+
+    QImage image2 = image.scaled(256,167,Qt::KeepAspectRatioByExpanding,Qt::SmoothTransformation);
+
     //std::cout << "save image " << file_path << std::endl;
-    if ( ! image.save( file_path_all, format.toAscii() ) )
+    if ( ! image2.save( file_path_all, format.toAscii() ) )
     {
         QMessageBox::critical( this,
                                tr( "Error" ),

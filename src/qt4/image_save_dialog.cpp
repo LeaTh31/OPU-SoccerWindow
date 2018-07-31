@@ -45,9 +45,11 @@
 
 #include "options.h"
 
-#include <iostream>
-#include <cassert>
-#include <cstdlib>
+#include <arpa/inet.h>
+
+// Lea Eisti 2018
+// If we want the image to be analysed by the python model : true
+const int SITUATION_SCORE = true;
 
 /*-------------------------------------------------------------------*/
 /*!
@@ -605,7 +607,7 @@ ImageSaveDialog::saveImage( const int start_cycle,
 
         M_field_canvas->draw( painter );
 
-        //std::cout << "save image " << file_path << std::endl;
+        // std::cout << "save image " << file_path << std::endl;
         if ( ! image.save( file_path_all, format.toAscii() ) )
         {
             QMessageBox::critical( this,
@@ -681,7 +683,7 @@ ImageSaveDialog::saveImage( const int current_index,
             return;
         }
     }
-
+    
     {
         // permit to have the prefix written correctly
         QString name_prefix_trim = name_prefix;
@@ -696,27 +698,10 @@ ImageSaveDialog::saveImage( const int current_index,
 
     QString file_ext = tr( "." ) + format;
 
-    // QSize size(256,167);
-
-    // const QSize size = M_field_canvas->size();
-    // std::cout << (M_field_canvas->size()) << std::endl;
-
     QImage image( M_field_canvas->size(), QImage::Format_RGB32 );
-    // image.size() = QSize(256,167);
-    // QImage image = image1.scaled(256,167,Qt::KeepAspectRatio);
-
-    // field_canvas : data of the field
-    // QImage image( size, QImage::Format_RGB32 );
-
+    
     // constructs a painter that begins painting the paint "image" immediately.
     QPainter painter( &image );
-
-    // ui->frameLabel->setPixmap(painter.scaled(32, 32, Qt::IgnoreAspectRatio, Qt::FastTransformation));
-
-
-    // painter.scale(0.8,0.8);
-
-    // QImage image = image1.scaled(256,167, Qt::IgnoreAspectRatio);
 
     // full file path
     QString file_path_all = file_path;
@@ -726,12 +711,12 @@ ImageSaveDialog::saveImage( const int current_index,
 
     M_field_canvas->draw( painter );
 
+    // Lea Eisti 2018
+    // To have the same size that the Python model wants
     painter.scale(0.2,0.2);
-
-    QImage image2 = image.scaled(256,167,Qt::KeepAspectRatioByExpanding,Qt::SmoothTransformation);
-
-    //std::cout << "save image " << file_path << std::endl;
-    if ( ! image2.save( file_path_all, format.toAscii() ) )
+    QImage image3 = image.scaled(256,160,Qt::IgnoreAspectRatio,Qt::SmoothTransformation);
+    
+    if ( ! image3.save( file_path_all, format.toAscii() ) )
     {
         QMessageBox::critical( this,
                                tr( "Error" ),
@@ -741,4 +726,83 @@ ImageSaveDialog::saveImage( const int current_index,
     }
     
     accept();
+
+
+    // Lea Eisti 2018
+    if (SITUATION_SCORE) 
+    {
+
+        // adress port
+        int PORT =  15555;
+        int sock;
+        /* 
+        struct sockaddr_in : data type for addresses
+        struct sockaddr_in {
+            unsigned short sin_family; : Internet protocol (AF_INET)
+            unsigned short sin_port;  : Address port (16 bits)
+            struct in_addr sin_addr; : Internet address (32 bits) 
+            char sin_zero[8];  : Not used
+        }
+        */    
+        struct sockaddr_in serv_addr;
+     
+        /* Création de la socket */
+        
+        // We create the socket : 
+        /*
+        int sock = socket(family, type, protocol);
+            sock: socket descriptor, an integer
+            family : integer, communication domain (AF_INET : IPv4 addresses)
+            type : communication type (SOCK_STREAM : connection-based service, TCP socket)
+            protocol : specifies protocol (0 : default protocol, here TCP because of the type)
+        return -1 if fail. 
+        */
+        if ( (sock = socket(AF_INET, SOCK_STREAM, 0)) < 0)
+        {
+            perror("Creation failed : ");
+        }
+     
+        // We configure the connexion
+        // inet_addr("127.0.0.1") : we set the socket address to localhost
+        serv_addr.sin_addr.s_addr = inet_addr("127.0.0.1");
+        serv_addr.sin_family = AF_INET;
+        serv_addr.sin_port = htons(PORT);
+     
+        // The client establishes a connection with the server by calling connect()
+        /*
+        connect(sock, &foreignAddr, addrlen); 
+            sock : integer, socket to be used in connection 
+            foreignAddr: struct sockaddr: address of the passive participant
+            addrlen: integer, sizeof(foreignAddr)
+        return -1 if fail. 
+        */
+        if( ::connect(sock, (struct sockaddr*)&serv_addr, sizeof(serv_addr)) < 0 )
+        {
+            perror("Connection failed : ");
+        }
+
+        // We want to send the name of the directory where the images are saving. 
+        std::string buffer1 = saved_dir.toStdString();
+        char buffer[256];
+        strcpy(buffer,buffer1.c_str());
+
+
+        // We send the data
+        /*
+        send(sock, msg, msgLen, flags);
+            msg: const void[], message to be transmitted
+            msgLen: integer, length of message (in bytes) to transmit
+            flags: integer, special options, usually just 0
+        return the number of bytes transmitted. -1 if error
+        */
+        if (send(sock, buffer, strlen(buffer), 0) < 0)
+        {
+            perror("Send failed : ");
+        }
+
+        // We close the socket    
+        ::close(sock);
+
+    }
+
 }

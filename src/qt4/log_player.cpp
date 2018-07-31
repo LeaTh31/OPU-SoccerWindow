@@ -412,8 +412,20 @@ LogPlayer::showLive()
         ! ( M_main_data.getViewHolder().lastPlayMode() == rcsc::PM_BeforeKickOff ) && 
         (index_to_save % 5 == 0) )
     {
+
+        //Test de l'OpenMp ?
+
+
         ((MainWindow*)(parent()))->saveFrame(index_to_save);
+        // system("python2.7 /home/lea/Documents/Python/PythonSituationScore/rivgg-VLR-Lea.py");
+        // ca marche pas
+        // ca bug a mort, on saute des images a enregistrer, on voit pas bien le match ...
+        // Le dossier -Done s'est pas cree
+        // le python n'est pas arrive a la fin
+        // est ce qu'il faut le faire en parallele avec genre, des fork ? Ohlala
     }    
+
+
 }
 
 /*-------------------------------------------------------------------*/

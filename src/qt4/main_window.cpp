@@ -1473,7 +1473,6 @@ MainWindow::createFieldCanvas()
 
     // the viewUpdated signal is emitted by the function MainWindow::openRCG
 
-    // when the signal viewUpdated is emitted, call update (?) 
     // = when the view is updated, update the canvas
     connect( this, SIGNAL( viewUpdated() ),
              M_field_canvas, SLOT( update() ) );
@@ -2082,14 +2081,6 @@ MainWindow::saveRCG()
 void
 MainWindow::saveFrame(int current_index)
 {
-
-    // std::cout << current_index << std::endl;
-    // std::cout << "empty : " << new_mainData.viewHolder().monitorViewCont().empty() << std::endl;
-
-    // If 1 : TRUE : empty
-
-    // Maybe M_main_data is enough, to replace M_log_player->getMainData()
-
     ImageSaveDialog dlg( this,
         M_field_canvas,
         M_log_player->getMainData(),
@@ -2266,7 +2257,7 @@ MainWindow::connectMonitorTo( const char * hostname )
 
     if ( ! M_monitor_client->isConnected() )
     {
-        std::cerr << "Conenction failed." << std::endl;
+        std::cerr << "Connection failed." << std::endl;
         delete M_monitor_client;
         M_monitor_client = static_cast< MonitorClient * >( 0 );
         return;
@@ -2800,8 +2791,6 @@ MainWindow::showImageSaveDialog()
     M_log_player->stop();
 
     //dlg : C++ Dialog Script
-    //??
-
     ImageSaveDialog dlg( this,
                          M_field_canvas,
                          M_main_data );

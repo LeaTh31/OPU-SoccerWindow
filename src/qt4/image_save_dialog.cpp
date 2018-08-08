@@ -630,11 +630,9 @@ ImageSaveDialog::saveImage( const int start_cycle,
 */
 /*
 * Modification and comments : Lea Eisti 2018
-* start_circle : index of the first frame we want
-* end_circle : index of the first frame we want
-*   Here replace by current_index because we save only one image
+* current_index : index of the frame we want
 * saved_dir : the directory where the images are saved
-* name_prefix : the name of the image ("image-"")
+* name_prefix : the name of the image ("image-")
 * format_name : the format of the image ("png")
 *
 * viewHolder : all the things we can see in the window (play mode, team, ...)
@@ -712,7 +710,7 @@ ImageSaveDialog::saveImage( const int current_index,
     M_field_canvas->draw( painter );
 
     // Lea Eisti 2018
-    // To have the same size that the Python model wants
+    // To have the same image size that the Python model wants
     painter.scale(0.2,0.2);
     QImage image3 = image.scaled(256,160,Qt::IgnoreAspectRatio,Qt::SmoothTransformation);
     
@@ -745,9 +743,7 @@ ImageSaveDialog::saveImage( const int current_index,
         }
         */    
         struct sockaddr_in serv_addr;
-     
-        /* Création de la socket */
-        
+             
         // We create the socket : 
         /*
         int sock = socket(family, type, protocol);
@@ -781,7 +777,7 @@ ImageSaveDialog::saveImage( const int current_index,
             perror("Connection failed : ");
         }
 
-        // We want to send the name of the directory where the images are saving. 
+        // We want to send the name of the directory where the images are saved. 
         std::string buffer1 = saved_dir.toStdString();
         char buffer[256];
         strcpy(buffer,buffer1.c_str());
@@ -802,7 +798,7 @@ ImageSaveDialog::saveImage( const int current_index,
 
         // We close the socket    
         ::close(sock);
-
+        
     }
 
 }

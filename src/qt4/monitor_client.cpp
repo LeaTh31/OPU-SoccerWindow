@@ -399,8 +399,6 @@ MonitorClient::sendKickOff()
 
     sendCommand( com );
 
-    // takeScreenshots();
-
 }
 
 /*-------------------------------------------------------------------*/
@@ -641,36 +639,3 @@ MonitorClient::sendCheckBal()
 
     sendCommand( com );
 }
-
-
-// void
-// MonitorClient::takeScreenshots()
-// {
-
-//     // QRect crop_rect(this->parent()->x(), this->parent()->y(), this->parent()->width(), this->parent()->height());
-//     QRect crop_rect(this->x(), this->y(), this->width(), this->height());
-
-//     QPixmap pixmap = QPixmap();
-    
-//     //pixmap = QtGui.QPixmap.grabWindow(widget.winId());
-
-//     // pixmap = QPixmap::grabWindow(QApplication::desktop()->winId(),
-//     //   crop_rect.left(),
-//     //   crop_rect.top(),
-//     //   crop_rect.width(),
-//     //   crop_rect.height());
-
-//     pixmap = QPixmap::grabWindow(QApplication::desktop()->winId());
-
-//     //pixmap = QPixmap::grabWindow(this->winId());
-
-
-//     //pixmap = QPixmap::grabWindow(this->winId());
-//     //pixmap = QPixmap::grabWindow((WId (winId());
-
-//     QString format = "png";
-//     QString filePath = QDir::currentPath()+"/ResultImages/myscreen."+format;
-//     pixmap.save(filePath, format.toAscii());
-
-
-// }

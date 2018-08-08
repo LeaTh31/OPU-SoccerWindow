@@ -172,8 +172,6 @@ public:
 
     void sendCheckBal();
 
-    //void takeScreenshots();
-
 private slots:
 
     void handleReceive();

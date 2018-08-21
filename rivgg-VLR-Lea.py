@@ -1,7 +1,9 @@
 from scipy import misc
+import Tkinter as tk
 import glob
 import numpy as np
 import time
+import sys
 import tensorflow as tf
 import cv2
 import csv
@@ -10,6 +12,8 @@ import shutil
 import os
 import socket
 from tensorflow.python.framework import graph_util
+from PyQt4.QtGui import QLabel, QApplication
+from PyQt4 import QtTest
 
 MODE = 1
 DROP_RATE = 0.15
@@ -45,6 +49,7 @@ with graph.as_default():
     socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
     socket.bind(('', 15555))
 
+
     # We load the values of variables from the graph
     with tf.Session() as sess:  
 
@@ -69,7 +74,9 @@ with graph.as_default():
             #   Return the data receive. 
             dirname = client.recv(4096)
 
-            # print dirname
+            # We create a directory to move the image already evaluated
+            if not os.path.exists(dirname + "-Done"):
+                os.mkdir(dirname + "-Done")
 
             #Image directory
             validation_images = []
@@ -77,8 +84,6 @@ with graph.as_default():
                 validation_images.append(image_name)
 
             L = len(validation_images)
-
-            # print("Nb d'image : " + str(L)) 
 
             total_logits = [0.0 for i in range(L)]
 
@@ -100,30 +105,33 @@ with graph.as_default():
                 # 'Placeholder_3:0':False = not training
                 batch_logits = sess.run('logits/BiasAdd:0', feed_dict={'Placeholder:0': batch, 'Placeholder_3:0':False})
 
-                total_logits[i] = batch_logits
+                if batch_logits < 100:
+                    total_logits[i] = int(round(batch_logits)) - 100
+                else:
+                    total_logits[i] = int(round(batch_logits)) - 99
+                    if total_logits[i] > 100:
+                        total_logits[i] = 100
+
+                dest = dirname + "-Done"
+
+                # We move the image already evaluated
+                try:
+                    shutil.move(im,dest)
+                    # print "Move"
+                except:
+                    print "Move error"
 
 
-            f = open(dirname + "-predictions.csv",'a')
+            filenameCsv = dirname + "-predictions.csv"
+            f = open(filenameCsv,'a')
 
             writer = csv.writer(f, lineterminator='\n')
             for nb_logits in total_logits:
                 print(nb_logits)
                 writer.writerow([nb_logits])
             f.close()
-
-            # We create a directory to move the image already evaluated
-            if not os.path.exists(dirname + "-Done"):
-                os.mkdir(dirname + "-Done")
-
-            dest = dirname + "-Done"
-            for image_name in glob.glob(dirname + "/*"):
-                try:
-                    shutil.move(image_name,dest)
-                    # print "Copy"
-                except:
-                    print "Copy error"
-
-                    
+            
         # We close the client and socket
         client.close()
         stock.close()
+
